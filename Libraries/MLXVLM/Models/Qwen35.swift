@@ -531,7 +531,7 @@ public enum Qwen35Language {
             // The mask is sized for the keys the cache presents; slicing it to
             // an offset-derived length would misalign it after eviction.
             let attentionMask: MLXFast.ScaledDotProductAttentionMaskMode =
-                mask.map { .array($0) } ?? .none
+                mask != nil ? .causal : .none
 
             return attentionWithCacheUpdate(
                 queries: queries,
